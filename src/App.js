@@ -1,28 +1,29 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import Graph from './components/Graph';
+import GraphLandingPage from './components/GraphLandingPage';
 import Table from './components/Table';
+import Graph from './components/Graph';
+import Pie from './components/Pie';
+import './components/global.css';
 
 function App() {
   return (
-    <div>
-      <nav>
+    <div className="app-container">
+      <nav className="app-nav" aria-label="Main navigation">
         <ul>
-          <li>
-            <Link to="/graph">Graph</Link>
-          </li>
-          <li>
-            <Link to="/table">Table</Link>
-          </li>
+          <li><Link to="/table" aria-label="View Table">View Table</Link></li>
+          <li><Link to="/graphs" aria-label="View Graphs">View Graphs</Link></li>
         </ul>
       </nav>
-
-      {/* A <Routes> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
-      <Routes>
-        <Route path="/graph" element={<Graph />} />
-        <Route path="/table" element={<Table />} />
-      </Routes>
+      <div className="content">
+        <Routes>
+          <Route path="/table" element={<Table />} />
+          <Route path="/graphs" element={<GraphLandingPage />} />
+          <Route path="/graphs/bar" element={<Graph />} />
+          <Route path="/graphs/pie" element={<Pie />} />
+          <Route path="*" element={<p className='welcome-message'> Welcome to the Intel Coding Assesment</p>} />
+        </Routes>
+      </div>
     </div>
   );
 }
